@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../theme.dart';
-import '../screens/home_screen.dart';
+import '../screens/login_screen.dart';
 import '../components/onboarding/page_content.dart';
 import '../components/onboarding/navigation_button.dart';
 
@@ -35,7 +35,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             onPressed: () async {
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
-                  builder: (context) => const HomeScreen(),
+                  builder: (context) => const LoginScreen(),
                 ),
               );
             },
@@ -113,7 +113,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ? () async {
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const LoginScreen(),
                         ),
                       );
                     }
