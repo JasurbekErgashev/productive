@@ -8,10 +8,17 @@ class Productive extends StatelessWidget {
   const Productive({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Productive',
-      home: Scaffold(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Productive'),
+        ),
+        body: const Center(
+          child: Text('Productive'),
+        ),
+      ),
     );
   }
 }
