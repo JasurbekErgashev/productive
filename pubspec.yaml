@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
   flutter_test:
@@ -39,8 +40,10 @@ flutter:
   assets:
     - assets/images/
 
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+    - family: Barlow
+      fonts:
+        - asset: assets/fonts/Barlow-Bold.ttf
+        - asset: assets/fonts/Barlow-SemiBold.ttf
+        - asset: assets/fonts/Barlow-Medium.ttf
+        - asset: assets/fonts/Barlow-Regular.ttf

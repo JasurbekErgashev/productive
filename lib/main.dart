@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import './screens/onboarding_screen.dart';
+import './theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(const Productive());
 }
 
@@ -11,14 +20,8 @@ class Productive extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Productive',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Productive'),
-        ),
-        body: const Center(
-          child: Text('Productive'),
-        ),
-      ),
+      theme: ProductiveTheme.theme(),
+      home: const OnboardingScreen(),
     );
   }
 }
