@@ -6,17 +6,17 @@ import '../components/registration/input_decoration.dart';
 import '../components/registration/registration_primary_button.dart';
 import '../components/registration/or_divider.dart';
 import '../services/constants.dart';
+import '../screens/login_screen.dart';
 import '../screens/home_screen.dart';
-import '../screens/signup_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   bool isObscure = true;
   final _formKey = GlobalKey<FormState>();
   @override
@@ -104,23 +104,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                'Forgot password?',
-                                style: TextStyle(
-                                  color: AppColors.blueMediumBlue,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         const SizedBox(height: 30),
                         RegistrationPrimaryButton(
                           tabHandler: () {
@@ -132,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             }
                           },
-                          buttonText: 'Login',
+                          buttonText: 'Sign Up',
                         ),
                         const SizedBox(height: 75),
                         const OrDivider(),
@@ -161,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an account?   ',
+                          'Already have an account?   ',
                           style: TextStyle(
                             color: AppColors.white,
                             fontWeight: FontWeight.w500,
@@ -171,12 +154,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           onTap: () {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
+                                builder: (context) => const LoginScreen(),
                               ),
                             );
                           },
                           child: Text(
-                            'Sign up',
+                            'Login',
                             style: TextStyle(
                               color: AppColors.blueMediumBlue,
                               fontWeight: FontWeight.w500,
