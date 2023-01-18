@@ -4,7 +4,7 @@ import '../theme.dart';
 import '../services/constants.dart';
 import '../components/registration/input_decoration.dart';
 import '../components/registration/registration_primary_button.dart';
-import 'home_screen.dart';
+import './email_verification.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -87,7 +87,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     if (_formKey.currentState!.validate()) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
+                          builder: (context) => const EmailVerificationScreen(),
                         ),
                       );
                     }
