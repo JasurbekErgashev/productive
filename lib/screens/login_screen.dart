@@ -88,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           cursorColor: AppColors.blueMediumBlue,
                           decoration: customInputDecoration(
                             hintText: 'Password',
+                            isPassword: true,
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import '../../theme.dart';
 
 InputDecoration customInputDecoration(
-    {required String hintText, Widget? suffixIcon}) {
+    {required String hintText, Widget? suffixIcon, bool? isPassword}) {
   return InputDecoration(
     hintText: hintText,
     hintStyle: TextStyle(
       color: AppColors.white.withOpacity(0.6),
       fontWeight: FontWeight.w400,
       fontSize: 14,
-      letterSpacing: suffixIcon != null ? 0 : null,
+      letterSpacing: isPassword != null ? 0 : null,
     ),
     filled: true,
     fillColor: AppColors.blueDarkBlue2,

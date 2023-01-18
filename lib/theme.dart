@@ -55,6 +55,14 @@ class ProductiveTheme {
       //primaryColor: AppColors.primary,
       colorScheme: ColorScheme.fromSwatch(accentColor: AppColors.dark),
       fontFamily: 'Barlow',
+      checkboxTheme: CheckboxThemeData(
+        checkColor: MaterialStateProperty.all(AppColors.white),
+        fillColor: MaterialStateProperty.all(AppColors.blueMediumBlue),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
+      ),
+
       //appBarTheme: AppBarTheme(
       //  backgroundColor: AppColors.primary,
       //  foregroundColor: AppColors.white2,
