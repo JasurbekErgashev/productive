@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: const Center(
-        child: Text('Productive'),
+        child: Text('Productive', style: TextStyle(color: Colors.white)),
       ),
     );
   }

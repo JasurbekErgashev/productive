@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "372792107273",
+    "project_id": "productive-7bd1b",
+    "storage_bucket": "productive-7bd1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372792107273:android:88628f062f64bccb3bb3d8",
+        "android_client_info": {
+          "package_name": "dev.jasurbek.productive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "372792107273-9eke04lg5n203lpth5asohtg7pgdvp55.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSxFzg8Xzmj_JQ0XvSF_rD6uC8QcTp3kI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "372792107273-9eke04lg5n203lpth5asohtg7pgdvp55.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
