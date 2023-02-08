@@ -6,11 +6,11 @@ class RegistrationPrimaryButton extends StatelessWidget {
   const RegistrationPrimaryButton({
     super.key,
     required this.tabHandler,
-    required this.buttonText,
+    required this.buttonChild,
   });
 
   final VoidCallback tabHandler;
-  final String buttonText;
+  final Widget buttonChild;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,7 @@ class RegistrationPrimaryButton extends StatelessWidget {
           Size(MediaQuery.of(context).size.width, 50),
         ),
       ),
-      child: Text(
-        buttonText,
-        style: const TextStyle(
-          fontWeight: FontWeight.w500,
-          fontSize: 16,
-        ),
-      ),
+      child: buttonChild,
     );
   }
 }

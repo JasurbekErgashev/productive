@@ -1,14 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../app.dart';
 import '../theme.dart';
 import '../components/registration/social_login_button.dart';
 import '../components/registration/input_decoration.dart';
 import '../components/registration/registration_primary_button.dart';
 import '../components/registration/or_divider.dart';
 import '../services/constants.dart';
-import '../screens/home_screen.dart';
-import '../screens/signup_screen.dart';
-import '../screens/forgot_password_screen.dart';
+import './signup_screen.dart';
+import './forgot_password_screen.dart';
+import '../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,8 +23,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool isObscure = true;
+  bool _isObscure = true;
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -53,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Column(
                       children: [
                         TextFormField(
+                          controller: _emailController,
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Email is required';
@@ -61,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                             return null;
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
@@ -71,6 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          controller: _passwordController,
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Password is required';
@@ -79,7 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             }
                             return null;
                           },
-                          obscureText: isObscure,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          obscureText: _isObscure,
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
@@ -92,15 +111,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
-                                  isObscure = !isObscure;
+                                  _isObscure = !_isObscure;
                                 });
                               },
                               icon: Icon(
-                                isObscure
+                                _isObscure
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
                               ),
-                              color: isObscure
+                              color: _isObscure
                                   ? AppColors.white.withOpacity(0.6)
                                   : AppColors.blueMediumBlue,
                             ),
@@ -132,16 +151,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 30),
                         RegistrationPrimaryButton(
-                          tabHandler: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
-                                ),
-                              );
-                            }
-                          },
-                          buttonText: 'Login',
+                          tabHandler: login,
+                          buttonChild: const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16,
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 75),
                         const OrDivider(),
@@ -202,5 +219,38 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  Future login() async {
+    final isValid = _formKey.currentState!.validate();
+    if (!isValid) return;
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(color: Colors.white),
+      ),
+    );
+    try {
+      await Provider.of<AuthProvider>(
+        context,
+        listen: false,
+      ).login(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      if (mounted) return;
+    } on FirebaseAuthException catch (error) {
+      showTopSnackBar(
+        Overlay.of(context),
+        dismissDirection: [DismissDirection.up],
+        CustomSnackBar.error(
+          message: error.message!,
+          textAlign: TextAlign.left,
+        ),
+      );
+    }
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

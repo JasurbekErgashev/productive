@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../theme.dart';
 import '../components/registration/social_login_button.dart';
@@ -6,8 +9,7 @@ import '../components/registration/input_decoration.dart';
 import '../components/registration/registration_primary_button.dart';
 import '../components/registration/or_divider.dart';
 import '../services/constants.dart';
-import '../screens/login_screen.dart';
-import '../screens/home_screen.dart';
+import './login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,7 +20,19 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool isObscure = true;
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -52,6 +66,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Column(
                       children: [
                         TextFormField(
+                          controller: _emailController,
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Email is required';
@@ -60,6 +75,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
                             return null;
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           style: TextStyle(
                             color: AppColors.white,
                             fontSize: 14,
@@ -70,6 +86,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          controller: _passwordController,
                           validator: (value) {
                             if (value == null || value.trim().isEmpty) {
                               return 'Password is required';
@@ -78,6 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             }
                             return null;
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           obscureText: isObscure,
                           style: TextStyle(
                             color: AppColors.white,
@@ -107,16 +125,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         const SizedBox(height: 30),
                         RegistrationPrimaryButton(
-                          tabHandler: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
+                          tabHandler: signup,
+                          buttonChild: _isLoading
+                              ? const CircularProgressIndicator(
+                                  color: Colors.white,
+                                )
+                              : const Text(
+                                  'Sign Up',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              );
-                            }
-                          },
-                          buttonText: 'Sign Up',
                         ),
                         const SizedBox(height: 75),
                         const OrDivider(),
@@ -177,5 +197,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
+  }
+
+  Future signup() async {
+    if (_formKey.currentState!.validate()) {
+      setState(() => _isLoading = true);
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+      } on FirebaseAuthException catch (error) {
+        showTopSnackBar(
+          Overlay.of(context),
+          dismissDirection: [DismissDirection.up],
+          CustomSnackBar.error(
+            message: error.message!,
+            textAlign: TextAlign.left,
+          ),
+        );
+      } finally {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 }

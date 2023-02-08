@@ -155,7 +155,13 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                         );
                       }
                     },
-                    buttonText: 'Save',
+                    buttonChild: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ],
               ),

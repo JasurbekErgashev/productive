@@ -19,7 +19,7 @@ InputDecoration customInputDecoration(
       borderSide: BorderSide(
         color: const Color(0xFF006EE9).withOpacity(0.1),
         width: 1,
-        strokeAlign: StrokeAlign.inside,
+        strokeAlign: BorderSide.strokeAlignInside,
       ),
     ),
     focusedBorder: OutlineInputBorder(
@@ -27,7 +27,7 @@ InputDecoration customInputDecoration(
       borderSide: BorderSide(
         color: const Color(0xFF006EE9).withOpacity(0.5),
         width: 1,
-        strokeAlign: StrokeAlign.inside,
+        strokeAlign: BorderSide.strokeAlignInside,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
@@ -35,7 +35,7 @@ InputDecoration customInputDecoration(
       borderSide: const BorderSide(
         color: Colors.red,
         width: 1,
-        strokeAlign: StrokeAlign.inside,
+        strokeAlign: BorderSide.strokeAlignInside,
       ),
     ),
     errorBorder: OutlineInputBorder(
@@ -43,7 +43,7 @@ InputDecoration customInputDecoration(
       borderSide: const BorderSide(
         color: Colors.red,
         width: 1,
-        strokeAlign: StrokeAlign.inside,
+        strokeAlign: BorderSide.strokeAlignInside,
       ),
     ),
     suffixIcon: suffixIcon,

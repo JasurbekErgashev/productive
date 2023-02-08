@@ -126,7 +126,13 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       );
                     }
                   },
-                  buttonText: 'Verify',
+                  buttonChild: const Text(
+                    'Verify',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -141,6 +147,6 @@ BorderSide customBorderSide(double opacity) {
   return BorderSide(
     color: const Color(0xFF006EE9).withOpacity(opacity),
     width: 1,
-    strokeAlign: StrokeAlign.inside,
+    strokeAlign: BorderSide.strokeAlignInside,
   );
 }

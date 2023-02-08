@@ -92,7 +92,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       );
                     }
                   },
-                  buttonText: 'Recover password',
+                  buttonChild: const Text(
+                    'Recover password',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ],
             ),
