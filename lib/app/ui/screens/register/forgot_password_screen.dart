@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import '../theme.dart';
-import '../services/constants.dart';
-import '../components/registration/input_decoration.dart';
-import '../components/registration/registration_primary_button.dart';
-import './email_verification.dart';
+import 'package:productive/app/ui/screens/register/email_verification.dart';
+import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
+import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/shared/constants.dart';
+import 'package:productive/theme.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

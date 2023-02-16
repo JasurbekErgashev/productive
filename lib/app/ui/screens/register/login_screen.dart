@@ -1,19 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:productive/app/ui/screens/register/forgot_password_screen.dart';
+import 'package:productive/app/ui/screens/register/signup_screen.dart';
+import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
+import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
+import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
+import 'package:productive/providers/auth_provider.dart';
+import 'package:productive/shared/constants.dart';
+import 'package:productive/theme.dart';
+import 'package:provider/provider.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../app.dart';
-import '../theme.dart';
-import '../components/registration/social_login_button.dart';
-import '../components/registration/input_decoration.dart';
-import '../components/registration/registration_primary_button.dart';
-import '../components/registration/or_divider.dart';
-import '../services/constants.dart';
-import './signup_screen.dart';
-import './forgot_password_screen.dart';
-import '../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -53,7 +51,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: deviceContentHeight,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 72,
@@ -187,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Don\'t have an account?   ',
+                          "Don't have an account?   ",
                           style: TextStyle(
                             color: AppColors.white,
                             fontWeight: FontWeight.w500,
@@ -221,7 +218,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future login() async {
+  Future<void> login() async {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) return;
 
@@ -251,6 +248,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       );
     }
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    //navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

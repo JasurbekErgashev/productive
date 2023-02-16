@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../theme.dart';
+import 'package:productive/theme.dart';
 
 class OrDivider extends StatelessWidget {
   const OrDivider({super.key});

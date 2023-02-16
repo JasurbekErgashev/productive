@@ -1,15 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:productive/app/ui/screens/register/login_screen.dart';
+import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
+import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
+import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
+import 'package:productive/shared/constants.dart';
+import 'package:productive/theme.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
-import '../theme.dart';
-import '../components/registration/social_login_button.dart';
-import '../components/registration/input_decoration.dart';
-import '../components/registration/registration_primary_button.dart';
-import '../components/registration/or_divider.dart';
-import '../services/constants.dart';
-import './login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -51,7 +50,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: deviceContentHeight,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       height: 72,
@@ -199,7 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  Future signup() async {
+  Future<void> signup() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
       try {

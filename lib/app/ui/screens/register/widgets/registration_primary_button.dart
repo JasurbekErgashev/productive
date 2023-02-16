@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:productive/theme.dart';
 
-import '../../theme.dart';
-
-class SocialLoginButton extends StatelessWidget {
-  const SocialLoginButton({
-    super.key,
+class RegistrationPrimaryButton extends StatelessWidget {
+  const RegistrationPrimaryButton({
     required this.tabHandler,
-    required this.imagePath,
+    required this.buttonChild,
+    super.key,
   });
 
   final VoidCallback tabHandler;
-  final String imagePath;
+  final Widget buttonChild;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: tabHandler,
       style: ButtonStyle(
+        elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all(
-          AppColors.blueBlueBlack,
+          AppColors.blueMediumBlue,
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
@@ -26,15 +26,10 @@ class SocialLoginButton extends StatelessWidget {
           ),
         ),
         minimumSize: MaterialStateProperty.all(
-          const Size(60, 40),
+          Size(MediaQuery.of(context).size.width, 50),
         ),
-        elevation: MaterialStateProperty.all(0),
       ),
-      child: SizedBox(
-        height: 24,
-        width: 24,
-        child: Image.asset(imagePath),
-      ),
+      child: buttonChild,
     );
   }
 }

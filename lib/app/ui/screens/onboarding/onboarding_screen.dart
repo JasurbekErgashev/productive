@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:productive/app/ui/screens/onboarding/widgets/navigation_button.dart';
+import 'package:productive/app/ui/screens/onboarding/widgets/page_content.dart';
+import 'package:productive/app/ui/screens/register/login_screen.dart';
+import 'package:productive/shared/preferences.dart';
+import 'package:productive/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../theme.dart';
-import './login_screen.dart';
-import '../services/preferences.dart';
-import '../components/onboarding/page_content.dart';
-import '../components/onboarding/navigation_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});

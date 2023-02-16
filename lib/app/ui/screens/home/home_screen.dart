@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../theme.dart';
-import '../components/tasks/side_nav_bar_drawer.dart';
+import 'package:productive/app/ui/screens/home/tasks/widgets/side_nav_bar_drawer.dart';
+import 'package:productive/theme.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

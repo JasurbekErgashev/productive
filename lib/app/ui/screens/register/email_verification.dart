@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
-
-import '../theme.dart';
-import '../components/registration/registration_primary_button.dart';
-import './new_password.dart';
+import 'package:productive/app/ui/screens/register/new_password.dart';
+import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/theme.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
@@ -105,7 +104,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'If you don\'t receive code.',
+                          "If you don't receive code.",
                           style: TextStyle(color: AppColors.white),
                         ),
                         Text(
@@ -146,7 +145,5 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
 BorderSide customBorderSide(double opacity) {
   return BorderSide(
     color: const Color(0xFF006EE9).withOpacity(opacity),
-    width: 1,
-    strokeAlign: BorderSide.strokeAlignInside,
   );
 }

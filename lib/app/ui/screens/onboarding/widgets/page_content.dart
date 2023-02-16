@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../../theme.dart';
+import 'package:productive/theme.dart';
 
 class OnboardingPageContent extends StatelessWidget {
   const OnboardingPageContent({
-    super.key,
     required this.imagePath,
     required this.title,
     required this.subTitle,
+    super.key,
   });
 
   final String imagePath;
@@ -19,7 +18,6 @@ class OnboardingPageContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 20),

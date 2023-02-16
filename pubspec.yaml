@@ -12,23 +12,36 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # ui tool-kits
   cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.0.0+2
   pinput: ^2.2.21
   top_snackbar_flutter: ^3.0.0+1
+  font_awesome_flutter: ^10.3.0
+
+  # navigation
+  go_router: ^6.0.7
+
+  # state management
   provider: ^6.0.5
+
+  # utils
   shared_preferences: ^2.0.17
+
+  # firebase
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.5
-  font_awesome_flutter: ^10.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
-  flutter_launcher_icons: ^0.11.0
+  # lints & formatters
+  very_good_analysis: ^4.0.0
+
+  # launcher icons & splash screen
   flutter_native_splash: ^2.2.16
+  flutter_launcher_icons: ^0.11.0
 
 flutter_icons:
   android: "launcher_icon"

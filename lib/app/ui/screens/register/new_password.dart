@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../theme.dart';
-import '../components/registration/input_decoration.dart';
-import '../components/registration/registration_primary_button.dart';
-import './home_screen.dart';
+import 'package:productive/app/ui/screens/register/home_screen.dart';
+import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
+import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/theme.dart';
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-
-import '../../theme.dart';
+import 'package:productive/theme.dart';
 
 class OnBoardingNavigationButton extends StatelessWidget {
   const OnBoardingNavigationButton({
-    super.key,
     required this.tabHandler,
     required this.icon,
+    super.key,
   });
 
   final VoidCallback? tabHandler;
@@ -25,7 +24,7 @@ class OnBoardingNavigationButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
         ),
-        padding: MaterialStateProperty.all(const EdgeInsets.all(0)),
+        padding: MaterialStateProperty.all(EdgeInsets.zero),
       ),
       onPressed: tabHandler,
       child: Icon(icon),
