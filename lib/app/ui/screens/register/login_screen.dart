@@ -1,17 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:productive/app/ui/screens/register/forgot_password_screen.dart';
-import 'package:productive/app/ui/screens/register/signup_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
 import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
 import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
 import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
-import 'package:productive/providers/auth_provider.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
-import 'package:provider/provider.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -127,14 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPasswordScreen(),
-                                  ),
-                                );
-                              },
+                              onTap: () => context.go('login/forgotPassword'),
                               child: Text(
                                 'Forgot password?',
                                 style: TextStyle(
@@ -191,13 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
-                              ),
-                            );
-                          },
+                          onTap: () => context.go('/register'),
                           child: Text(
                             'Sign up',
                             style: TextStyle(
@@ -222,32 +203,33 @@ class _LoginScreenState extends State<LoginScreen> {
     final isValid = _formKey.currentState!.validate();
     if (!isValid) return;
 
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(
-        child: CircularProgressIndicator(color: Colors.white),
-      ),
-    );
-    try {
-      await Provider.of<AuthProvider>(
-        context,
-        listen: false,
-      ).login(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-      if (mounted) return;
-    } on FirebaseAuthException catch (error) {
-      showTopSnackBar(
-        Overlay.of(context),
-        dismissDirection: [DismissDirection.up],
-        CustomSnackBar.error(
-          message: error.message!,
-          textAlign: TextAlign.left,
-        ),
-      );
-    }
+    // TODO: Firebase login will be implemented later using Bloc
+    // showDialog(
+    //   context: context,
+    //   barrierDismissible: false,
+    //   builder: (context) => const Center(
+    //     child: CircularProgressIndicator(color: Colors.white),
+    //   ),
+    // );
+    // try {
+    //   await Provider.of<AuthProvider>(
+    //     context,
+    //     listen: false,
+    //   ).login(
+    //     email: _emailController.text,
+    //     password: _passwordController.text,
+    //   );
+    //   if (mounted) return;
+    // } on FirebaseAuthException catch (error) {
+    //   showTopSnackBar(
+    //     Overlay.of(context),
+    //     dismissDirection: [DismissDirection.up],
+    //     CustomSnackBar.error(
+    //       message: error.message!,
+    //       textAlign: TextAlign.left,
+    //     ),
+    //   );
+    // }
     //navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

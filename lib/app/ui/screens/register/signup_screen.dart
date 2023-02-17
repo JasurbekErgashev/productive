@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:productive/app/ui/screens/register/login_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
 import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
 import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
 import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -170,13 +167,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                builder: (context) => const LoginScreen(),
-                              ),
-                            );
-                          },
+                          onTap: () => context.go('/login'),
                           child: Text(
                             'Login',
                             style: TextStyle(
@@ -199,24 +190,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Future<void> signup() async {
     if (_formKey.currentState!.validate()) {
+      // TODO: Firebase register will be implemented later using Bloc
       setState(() => _isLoading = true);
-      try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-      } on FirebaseAuthException catch (error) {
-        showTopSnackBar(
-          Overlay.of(context),
-          dismissDirection: [DismissDirection.up],
-          CustomSnackBar.error(
-            message: error.message!,
-            textAlign: TextAlign.left,
-          ),
-        );
-      } finally {
-        setState(() => _isLoading = false);
-      }
+      // try {
+      //   await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      //     email: _emailController.text,
+      //     password: _passwordController.text,
+      //   );
+      // } on FirebaseAuthException catch (error) {
+      //   showTopSnackBar(
+      //     Overlay.of(context),
+      //     dismissDirection: [DismissDirection.up],
+      //     CustomSnackBar.error(
+      //       message: error.message!,
+      //       textAlign: TextAlign.left,
+      //     ),
+      //   );
+      // } finally {
+      //   setState(() => _isLoading = false);
+      // }
     }
   }
 }

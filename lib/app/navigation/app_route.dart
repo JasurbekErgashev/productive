@@ -1,1 +1,6 @@
-// TODO: Navigation has to be implemented using go_router package
+class AppRoute {
+  AppRoute._();
+  static const home = '/';
+  static const login = '/login';
+  static const register = '/register';
+}

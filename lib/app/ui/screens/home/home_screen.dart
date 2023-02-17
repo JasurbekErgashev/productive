@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:productive/app/ui/screens/home/calendar/calendar_page.dart';
+import 'package:productive/app/ui/screens/home/expenses/expense_page.dart';
+import 'package:productive/app/ui/screens/home/stats/stats_page.dart';
+import 'package:productive/app/ui/screens/home/tasks/all.dart';
+import 'package:productive/app/ui/screens/home/tasks/upcoming.dart';
 import 'package:productive/app/ui/screens/home/tasks/widgets/side_nav_bar_drawer.dart';
 import 'package:productive/theme.dart';
 
@@ -36,50 +42,77 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ],
       );
 
+  List<Widget> pages = const [
+    Placeholder(), // Ignore placeholder, we will keep tasks screen
+    // in the body since tabController is here
+    ExpensesPage(),
+    CalendarPage(),
+    StatsPage(),
+  ];
+
+  List<String> appBarTitle = const [
+    '',
+    'Expenses',
+    'Calendar',
+    'Stats',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-          icon: const FaIcon(FontAwesomeIcons.bars),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const FaIcon(FontAwesomeIcons.noteSticky),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Badge(
-              label: Text('2'),
-              child: FaIcon(FontAwesomeIcons.bell),
-            ),
-          ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: _tabBar.preferredSize,
-          child: _tabBar,
-        ),
+        title: Text(appBarTitle[_bottomBarIndex]),
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        leading: _bottomBarIndex == 0
+            ? IconButton(
+                onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                icon: const FaIcon(FontAwesomeIcons.bars),
+              )
+            : null,
+        actions: _bottomBarIndex == 0
+            ? [
+                IconButton(
+                  onPressed: () => context.go('/quickNotes'),
+                  icon: const FaIcon(FontAwesomeIcons.noteSticky),
+                ),
+                IconButton(
+                  onPressed: () => context.go('/notifications'),
+                  icon: const Badge(
+                    label: Text('2'),
+                    child: FaIcon(FontAwesomeIcons.bell),
+                  ),
+                ),
+              ]
+            : _bottomBarIndex == 1
+                ? [
+                    IconButton(
+                      onPressed: () {},
+                      icon: const FaIcon(FontAwesomeIcons.gear),
+                    ),
+                  ]
+                : [],
+        bottom: _bottomBarIndex == 0
+            ? PreferredSize(
+                preferredSize: _tabBar.preferredSize,
+                child: _tabBar,
+              )
+            : null,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: TabBarView(
-          controller: _tabController,
-          children: [
-            Text(
-              'Upcoming',
-              style: TextStyle(color: AppColors.white),
-            ),
-            Text(
-              'All',
-              style: TextStyle(color: AppColors.white),
-            ),
-          ],
-        ),
-      ),
+      body: _bottomBarIndex == 0
+          ? Padding(
+              padding: const EdgeInsets.all(16),
+              child: TabBarView(
+                controller: _tabController,
+                children: const [
+                  UpcomingTasks(),
+                  AllTasks(),
+                ],
+              ),
+            )
+          : pages[_bottomBarIndex],
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() => _bottomBarIndex = index);
