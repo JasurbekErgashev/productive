@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:productive/providers/auth_provider.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 40),
             ElevatedButton.icon(
               onPressed: () {
-                Provider.of<AuthProvider>(context, listen: false).logout();
+                // Provider.of<AuthProvider>(context, listen: false).logout();
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),

@@ -34,6 +34,7 @@ class ProductiveTheme {
       useMaterial3: true,
       scaffoldBackgroundColor: AppColors.dark,
       //primaryColor: AppColors.primary,
+
       colorScheme: ColorScheme.fromSwatch(accentColor: AppColors.dark),
       splashColor: AppColors.blueMediumBlue,
       fontFamily: 'Barlow',

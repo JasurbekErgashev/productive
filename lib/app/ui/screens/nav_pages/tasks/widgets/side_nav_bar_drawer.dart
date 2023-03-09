@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:productive/app/ui/screens/home/tasks/widgets/list_tile_drawer.dart';
+import 'package:productive/app/ui/screens/nav_pages/tasks/widgets/list_tile_drawer.dart';
 import 'package:productive/theme.dart';
 
 class CustomDrawer extends StatelessWidget {

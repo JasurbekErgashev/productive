@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:productive/app.dart';
 import 'package:productive/firebase_options.dart';
-import 'package:productive/providers/auth_provider.dart';
-import 'package:productive/shared/preferences.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,13 +13,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  final isFirstLaunched = await AppPreferences.getFirstLaunched() ?? false;
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-      ],
-      child: Productive(isFirstLaunched: isFirstLaunched),
-    ),
+    const Productive(),
   );
 }

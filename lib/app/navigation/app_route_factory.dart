@@ -1,65 +1,139 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
-import 'package:productive/app/ui/screens/home/home_screen.dart';
-import 'package:productive/app/ui/screens/notifications/notifications_screen.dart';
-import 'package:productive/app/ui/screens/quick_notes/quick_notes_screen.dart';
-import 'package:productive/app/ui/screens/register/forgot_password_screen.dart';
-import 'package:productive/app/ui/screens/register/login_screen.dart';
-import 'package:productive/app/ui/screens/register/signup_screen.dart';
+import 'package:productive/app/navigation/navigator_module.dart';
+import 'package:productive/app/ui/screens/nav_pages/calendar/calendar_screen.dart';
+import 'package:productive/app/ui/screens/nav_pages/expenses/expense_screen.dart';
+import 'package:productive/app/ui/screens/nav_pages/stats/stats_screen.dart';
+import 'package:productive/app/ui/screens/nav_pages/tasks/tasks_screen.dart';
+import 'package:productive/app/ui/screens/root_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: AppRoute.home,
+  initialLocation: AppRoute.tasks,
+  navigatorKey: NavigatorModule.rNavKey,
   routes: [
     // GoRoute(
-    //   path: AppRoute.root,
-    //   builder: (context, state) => SplashScreen(),
+    //   path: AppRoute.login,
+    //   builder: (context, state) => LoginScreen(
+    //     viewModel: LoginScreenViewModel(),
+    //   ),
     // ),
-    GoRoute(
-      path: AppRoute.register,
-      builder: (context, state) => const SignUpScreen(),
-      routes: const [
-        // GoRoute(
-        //   path: 'otp',
-        //   builder: (context, state) => RegisterOtpScreen(),
-        // ),
-        // GoRoute(
-        //   path: 'password',
-        //   builder: (context, state) => RegisterPasswordScreen(),
-        // ),
-        // GoRoute(
-        //   path: 'details',
-        //   builder: (context, state) => RegisterDetailsScreen(),
-        // ),
-      ],
-    ),
-    GoRoute(
-      path: AppRoute.login,
-      builder: (context, state) => const LoginScreen(),
-      routes: [
-        // TODO: Email verification and create new password screen probably not used later
-        // Since, firebase provided this features itself on a web format
-        GoRoute(
-          path: 'forgotPassword',
-          builder: (context, state) => const ForgotPasswordScreen(),
-        ),
-      ],
-    ),
-    GoRoute(
-      path: AppRoute.home,
-      builder: (context, state) => const HomeScreen(),
+    // GoRoute(
+    //   path: AppRoute.editProfile,
+    //   builder: (context, state) => EditProfileScreen(
+    //     viewModel: EditProfileScreenViewModel(),
+    //   ),
+    //),
+    ShellRoute(
+      navigatorKey: NavigatorModule.sNavKey,
+      builder: (BuildContext context, GoRouterState state, Widget child) {
+        return RootScreen(child: child);
+      },
       routes: [
         GoRoute(
-          path: 'notifications',
-          builder: (context, state) => const NotificationsScreen(),
+          path: AppRoute.tasks,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const TasksScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
+          routes: const [
+            // GoRoute(
+            //   path: 'grades',
+            //   pageBuilder: (BuildContext context, GoRouterState state) {
+            //     return CustomTransitionPage(
+            //       key: state.pageKey,
+            //       child: GradesScreen(
+            //         viewModel: GradesScreenViewModel(),
+            //         extra: state.extra as ExtraGradeScreen,
+            //       ),
+            //       transitionDuration: const Duration(milliseconds: 300),
+            //       transitionsBuilder: (_, a, sa, child) {
+            //         var tween = Tween<double>(begin: 0.0, end: 1.0);
+            //         var curvedAnimation = CurvedAnimation(
+            //           parent: a,
+            //           curve: Curves.fastOutSlowIn,
+            //         );
+            //         return ScaleTransition(
+            //           scale: tween.animate(curvedAnimation),
+            //           child: child,
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
+            // GoRoute(
+            //   path: 'notifications',
+            //   pageBuilder: (BuildContext context, GoRouterState state) {
+            //     return CustomTransitionPage(
+            //       key: state.pageKey,
+            //       child: NotificationsScreen(
+            //         viewModel: NotificationsScreenViewModel(),
+            //       ),
+            //       transitionDuration: const Duration(milliseconds: 300),
+            //       transitionsBuilder: (_, a, sa, child) {
+            //         var begin = const Offset(1.0, 0.0);
+            //         var end = Offset.zero;
+            //         var tween = Tween(begin: begin, end: end);
+            //         return SlideTransition(
+            //           position: tween.animate(a),
+            //           child: child,
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
+          ],
         ),
         GoRoute(
-          path: 'quickNotes',
-          builder: (context, state) => const QuickNotesScreen(),
+          path: AppRoute.expenses,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const ExpensesScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
+          routes: const [
+            // GoRoute(
+            //   path: 'qr-scanner',
+            //   pageBuilder: (BuildContext context, GoRouterState state) {
+            //     return CustomTransitionPage(
+            //       key: state.pageKey,
+            //       child: const QRViewScreen(),
+            //       transitionDuration: Duration.zero,
+            //       transitionsBuilder: (_, __, ___, child) => child,
+            //     );
+            //   },
+            // ),
+          ],
         ),
-        // GoRoute(
-        //   path: 'securitySettings',
-        //   builder: (context, state) => SecurityScreen(),
-        // ),
+        GoRoute(
+          path: AppRoute.calendar,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const CalendarScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
+        ),
+        GoRoute(
+          path: AppRoute.stats,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const StatsScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
+        ),
       ],
     ),
   ],

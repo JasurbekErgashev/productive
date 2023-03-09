@@ -17,7 +17,7 @@ class ListTileDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      splashColor: AppColors.blueDarkBlue2,
+      // splashColor: AppColors.blueDarkBlue2,
       title: Row(
         children: [
           FaIcon(
