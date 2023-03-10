@@ -18,6 +18,9 @@ class OnBoardingNavigationButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(
           AppColors.blueMediumBlue,
         ),
+        foregroundColor: MaterialStateProperty.all(
+          AppColors.white,
+        ),
         minimumSize: MaterialStateProperty.all(const Size(44, 44)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

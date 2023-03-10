@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:productive/app/ui/screens/register/home_screen.dart';
-import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
-import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/app/ui/widgets/input_decoration.dart';
+import 'package:productive/app/ui/widgets/primary_button.dart';
 import 'package:productive/theme.dart';
 
 class CreateNewPassword extends StatefulWidget {
@@ -144,14 +143,14 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-                  RegistrationPrimaryButton(
+                  PrimaryButton(
                     tabHandler: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
+                        // Navigator.of(context).push(
+                        //   MaterialPageRoute(
+                        //     builder: (context) => const HomeScreen(),
+                        //   ),
+                        // );
                       }
                     },
                     buttonChild: const Text(

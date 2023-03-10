@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 import 'package:productive/app/ui/screens/register/new_password.dart';
-import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/app/ui/widgets/primary_button.dart';
 import 'package:productive/theme.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
@@ -115,7 +115,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     ),
                   ],
                 ),
-                RegistrationPrimaryButton(
+                PrimaryButton(
                   tabHandler: () {
                     if (_formKey.currentState!.validate()) {
                       Navigator.of(context).pushReplacement(

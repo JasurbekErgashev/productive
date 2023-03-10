@@ -1,30 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
-import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
-import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
-import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
+import 'package:productive/app/navigation/app_route.dart';
+import 'package:productive/app/ui/widgets/input_decoration.dart';
+import 'package:productive/app/ui/widgets/auth/or_divider.dart';
+import 'package:productive/app/ui/widgets/primary_button.dart';
+import 'package:productive/app/ui/widgets/auth/social_login_button.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool _isObscure = true;
+class _RegisterScreenState extends State<RegisterScreen> {
+  bool isObscure = true;
   final _formKey = GlobalKey<FormState>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
+    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    super.dispose();
   }
 
   @override
@@ -69,10 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14,
-                          ),
+                          style: AppTypography.p,
                           cursorColor: AppColors.blueMediumBlue,
                           keyboardType: TextInputType.emailAddress,
                           decoration: customInputDecoration(hintText: 'Email'),
@@ -89,59 +88,37 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          obscureText: _isObscure,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14,
-                            letterSpacing: 3,
-                          ),
+                          obscureText: isObscure,
+                          style: AppTypography.p.copyWith(letterSpacing: 3),
                           cursorColor: AppColors.blueMediumBlue,
                           decoration: customInputDecoration(
                             hintText: 'Password',
                             isPassword: true,
                             suffixIcon: IconButton(
                               onPressed: () {
-                                setState(() {
-                                  _isObscure = !_isObscure;
-                                });
+                                setState(() => isObscure = !isObscure);
                               },
                               icon: Icon(
-                                _isObscure
+                                isObscure
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
                               ),
-                              color: _isObscure
-                                  ? AppColors.white.withOpacity(0.6)
+                              color: isObscure
+                                  ? AppColors.whiteOpac50
                                   : AppColors.blueMediumBlue,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () => context.go('login/forgotPassword'),
-                              child: Text(
-                                'Forgot password?',
-                                style: TextStyle(
-                                  color: AppColors.blueMediumBlue,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         const SizedBox(height: 30),
-                        RegistrationPrimaryButton(
-                          tabHandler: login,
-                          buttonChild: const Text(
-                            'Login',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
-                            ),
+                        PrimaryButton(
+                          tabHandler: () {
+                            if (_formKey.currentState!.validate()) {
+                              // TODO: Implement register logic
+                            }
+                          },
+                          buttonChild: Text(
+                            'Sign Up',
+                            style: AppTypography.pNormal,
                           ),
                         ),
                         const SizedBox(height: 75),
@@ -171,20 +148,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Don't have an account?   ",
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          'Already have an account?   ',
+                          style: AppTypography.pNormal,
                         ),
                         GestureDetector(
-                          onTap: () => context.go('/register'),
+                          onTap: () => context.go(AppRoute.login),
                           child: Text(
-                            'Sign up',
-                            style: TextStyle(
-                              color: AppColors.blueMediumBlue,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            'Login',
+                            style: AppTypography.pNormalBlueMediumBlue,
                           ),
                         ),
                       ],
@@ -197,39 +168,5 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> login() async {
-    final isValid = _formKey.currentState!.validate();
-    if (!isValid) return;
-
-    // TODO: Firebase login will be implemented later using Bloc
-    // showDialog(
-    //   context: context,
-    //   barrierDismissible: false,
-    //   builder: (context) => const Center(
-    //     child: CircularProgressIndicator(color: Colors.white),
-    //   ),
-    // );
-    // try {
-    //   await Provider.of<AuthProvider>(
-    //     context,
-    //     listen: false,
-    //   ).login(
-    //     email: _emailController.text,
-    //     password: _passwordController.text,
-    //   );
-    //   if (mounted) return;
-    // } on FirebaseAuthException catch (error) {
-    //   showTopSnackBar(
-    //     Overlay.of(context),
-    //     dismissDirection: [DismissDirection.up],
-    //     CustomSnackBar.error(
-    //       message: error.message!,
-    //       textAlign: TextAlign.left,
-    //     ),
-    //   );
-    // }
-    //navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

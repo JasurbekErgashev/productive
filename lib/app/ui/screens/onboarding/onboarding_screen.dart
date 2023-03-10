@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:productive/app/navigation/app_route.dart';
 import 'package:productive/app/ui/screens/onboarding/widgets/navigation_button.dart';
 import 'package:productive/app/ui/screens/onboarding/widgets/page_content.dart';
-import 'package:productive/app/ui/screens/register/login_screen.dart';
 import 'package:productive/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -31,31 +32,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         backgroundColor: AppColors.dark,
         actions: [
           TextButton(
-            onPressed: () async {
-              // AppPreferences.setFirstLaunched();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => const LoginScreen(),
-                ),
-              );
-            },
-            child: Text(
-              'SKIP',
-              style: TextStyle(
-                color: AppColors.blueMediumBlue,
-                fontWeight: FontWeight.w400,
-                fontSize: 20,
-              ),
-            ),
+            onPressed: () => context.go(AppRoute.login),
+            child: const Text('SKIP', style: AppTypography.onbButtonStyle),
           ),
         ],
       ),
       body: PageView(
         controller: _controller,
         onPageChanged: (index) {
-          setState(() {
-            isFirstPage = index == 0;
-          });
+          setState(() => isFirstPage = index == 0);
         },
         children: const [
           OnboardingPageContent(
@@ -99,7 +84,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 );
               },
               effect: ExpandingDotsEffect(
-                dotColor: AppColors.blueMediumBlue.withOpacity(0.32),
+                dotColor: AppColors.blueMediumBlueOpac32,
                 activeDotColor: AppColors.blueMediumBlue,
                 dotHeight: 8,
                 dotWidth: 8,
@@ -110,14 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             OnBoardingNavigationButton(
               tabHandler: !isFirstPage
-                  ? () async {
-                      // AppPreferences.setFirstLaunched();
-                      // Navigator.of(context).pushReplacement(
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const LoginScreen(),
-                      //   ),
-                      // );
-                    }
+                  ? () => context.go(AppRoute.login)
                   : () => _controller.nextPage(
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,

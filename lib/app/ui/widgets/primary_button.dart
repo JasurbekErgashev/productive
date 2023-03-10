@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:productive/theme.dart';
 
-class RegistrationPrimaryButton extends StatelessWidget {
-  const RegistrationPrimaryButton({
+class PrimaryButton extends StatelessWidget {
+  const PrimaryButton({
     required this.tabHandler,
     required this.buttonChild,
     super.key,
@@ -19,6 +19,9 @@ class RegistrationPrimaryButton extends StatelessWidget {
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all(
           AppColors.blueMediumBlue,
+        ),
+        foregroundColor: MaterialStateProperty.all(
+          AppColors.white,
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

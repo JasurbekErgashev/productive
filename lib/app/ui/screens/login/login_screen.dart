@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
-import 'package:productive/app/ui/screens/register/widgets/or_divider.dart';
-import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
-import 'package:productive/app/ui/screens/register/widgets/social_login_button.dart';
+import 'package:productive/app/navigation/app_route.dart';
+import 'package:productive/app/ui/widgets/input_decoration.dart';
+import 'package:productive/app/ui/widgets/auth/or_divider.dart';
+import 'package:productive/app/ui/widgets/primary_button.dart';
+import 'package:productive/app/ui/widgets/auth/social_login_button.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  bool isObscure = true;
-  bool _isLoading = false;
+class _LoginScreenState extends State<LoginScreen> {
+  bool _isObscure = true;
   final _formKey = GlobalKey<FormState>();
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
   void dispose() {
+    super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    super.dispose();
   }
 
   @override
@@ -71,10 +70,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14,
-                          ),
+                          style: AppTypography.p,
                           cursorColor: AppColors.blueMediumBlue,
                           keyboardType: TextInputType.emailAddress,
                           decoration: customInputDecoration(hintText: 'Email'),
@@ -91,47 +87,51 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             return null;
                           },
                           autovalidateMode: AutovalidateMode.onUserInteraction,
-                          obscureText: isObscure,
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontSize: 14,
-                            letterSpacing: 3,
-                          ),
+                          obscureText: _isObscure,
+                          style: AppTypography.p.copyWith(letterSpacing: 3),
                           cursorColor: AppColors.blueMediumBlue,
                           decoration: customInputDecoration(
                             hintText: 'Password',
                             isPassword: true,
                             suffixIcon: IconButton(
                               onPressed: () {
-                                setState(() {
-                                  isObscure = !isObscure;
-                                });
+                                setState(() => _isObscure = !_isObscure);
                               },
                               icon: Icon(
-                                isObscure
+                                _isObscure
                                     ? Icons.visibility_off_rounded
                                     : Icons.visibility_rounded,
                               ),
-                              color: isObscure
-                                  ? AppColors.white.withOpacity(0.6)
+                              color: _isObscure
+                                  ? AppColors.whiteOpac50
                                   : AppColors.blueMediumBlue,
                             ),
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: const Text(
+                                'Forgot password?',
+                                style: AppTypography.pBlueMediumBlue,
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(height: 30),
-                        RegistrationPrimaryButton(
-                          tabHandler: signup,
-                          buttonChild: _isLoading
-                              ? const CircularProgressIndicator(
-                                  color: Colors.white,
-                                )
-                              : const Text(
-                                  'Sign Up',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16,
-                                  ),
-                                ),
+                        PrimaryButton(
+                          tabHandler: () {
+                            if (_formKey.currentState!.validate()) {
+                              // TODO: Implement login logic
+                            }
+                          },
+                          buttonChild: Text(
+                            'Login',
+                            style: AppTypography.pNormal,
+                          ),
                         ),
                         const SizedBox(height: 75),
                         const OrDivider(),
@@ -160,20 +160,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Already have an account?   ',
-                          style: TextStyle(
-                            color: AppColors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          "Don't have an account?   ",
+                          style: AppTypography.pNormal,
                         ),
                         GestureDetector(
-                          onTap: () => context.go('/login'),
+                          onTap: () => context.go(AppRoute.register),
                           child: Text(
-                            'Login',
-                            style: TextStyle(
-                              color: AppColors.blueMediumBlue,
-                              fontWeight: FontWeight.w500,
-                            ),
+                            'Sign up',
+                            style: AppTypography.pNormalBlueMediumBlue,
                           ),
                         ),
                       ],
@@ -186,29 +180,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> signup() async {
-    if (_formKey.currentState!.validate()) {
-      // TODO: Firebase register will be implemented later using Bloc
-      setState(() => _isLoading = true);
-      // try {
-      //   await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      //     email: _emailController.text,
-      //     password: _passwordController.text,
-      //   );
-      // } on FirebaseAuthException catch (error) {
-      //   showTopSnackBar(
-      //     Overlay.of(context),
-      //     dismissDirection: [DismissDirection.up],
-      //     CustomSnackBar.error(
-      //       message: error.message!,
-      //       textAlign: TextAlign.left,
-      //     ),
-      //   );
-      // } finally {
-      //   setState(() => _isLoading = false);
-      // }
-    }
   }
 }

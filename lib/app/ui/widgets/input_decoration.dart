@@ -8,10 +8,7 @@ InputDecoration customInputDecoration({
 }) {
   return InputDecoration(
     hintText: hintText,
-    hintStyle: TextStyle(
-      color: AppColors.white.withOpacity(0.6),
-      fontWeight: FontWeight.w400,
-      fontSize: 14,
+    hintStyle: AppTypography.pWhiteOpac50.copyWith(
       letterSpacing: isPassword != null ? 0 : null,
     ),
     filled: true,
@@ -19,25 +16,25 @@ InputDecoration customInputDecoration({
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
-        color: const Color(0xFF006EE9).withOpacity(0.1),
+        color: AppColors.blueOpac1,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: BorderSide(
-        color: const Color(0xFF006EE9).withOpacity(0.5),
+        color: AppColors.blueOpac5,
       ),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(
-        color: Colors.red,
+        color: AppColors.red,
       ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
       borderSide: const BorderSide(
-        color: Colors.red,
+        color: AppColors.red,
       ),
     ),
     suffixIcon: suffixIcon,

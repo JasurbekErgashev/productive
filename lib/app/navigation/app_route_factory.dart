@@ -6,24 +6,27 @@ import 'package:productive/app/ui/screens/nav_pages/calendar/calendar_screen.dar
 import 'package:productive/app/ui/screens/nav_pages/expenses/expense_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/stats/stats_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/tasks/tasks_screen.dart';
+import 'package:productive/app/ui/screens/onboarding/onboarding_screen.dart';
+import 'package:productive/app/ui/screens/login/login_screen.dart';
+import 'package:productive/app/ui/screens/register/register_screen.dart';
 import 'package:productive/app/ui/screens/root_screen.dart';
 
 final appRouter = GoRouter(
-  initialLocation: AppRoute.tasks,
+  initialLocation: AppRoute.onboarding,
   navigatorKey: NavigatorModule.rNavKey,
   routes: [
-    // GoRoute(
-    //   path: AppRoute.login,
-    //   builder: (context, state) => LoginScreen(
-    //     viewModel: LoginScreenViewModel(),
-    //   ),
-    // ),
-    // GoRoute(
-    //   path: AppRoute.editProfile,
-    //   builder: (context, state) => EditProfileScreen(
-    //     viewModel: EditProfileScreenViewModel(),
-    //   ),
-    //),
+    GoRoute(
+      path: AppRoute.onboarding,
+      builder: (context, state) => const OnboardingScreen(),
+    ),
+    GoRoute(
+      path: AppRoute.login,
+      builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      path: AppRoute.register,
+      builder: (context, state) => const RegisterScreen(),
+    ),
     ShellRoute(
       navigatorKey: NavigatorModule.sNavKey,
       builder: (BuildContext context, GoRouterState state, Widget child) {

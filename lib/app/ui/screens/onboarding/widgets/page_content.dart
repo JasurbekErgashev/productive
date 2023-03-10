@@ -18,33 +18,29 @@ class OnboardingPageContent extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(24),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(height: 20),
           Image.asset(
             imagePath,
             fit: BoxFit.cover,
           ),
-          const SizedBox(height: 50),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
-            ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                textAlign: TextAlign.center,
+                style: AppTypography.onbTitleStyle,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                subTitle,
+                textAlign: TextAlign.center,
+                style: AppTypography.onbSubTitleStyle,
+              ),
+            ],
           ),
-          const SizedBox(height: 5),
-          Text(
-            subTitle,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.white.withOpacity(0.5),
-              fontWeight: FontWeight.w400,
-              fontSize: 18,
-            ),
-          ),
+          const SizedBox(height: 80),
         ],
       ),
     );

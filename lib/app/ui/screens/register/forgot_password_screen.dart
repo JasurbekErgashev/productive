@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:productive/app/ui/screens/register/email_verification.dart';
-import 'package:productive/app/ui/screens/register/widgets/input_decoration.dart';
-import 'package:productive/app/ui/screens/register/widgets/registration_primary_button.dart';
+import 'package:productive/app/ui/widgets/input_decoration.dart';
+import 'package:productive/app/ui/widgets/primary_button.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
 
@@ -81,7 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ],
                 ),
-                RegistrationPrimaryButton(
+                PrimaryButton(
                   tabHandler: () {
                     if (_formKey.currentState!.validate()) {
                       Navigator.of(context).push(

@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:productive/app.dart';
 import 'package:productive/firebase_options.dart';
 
+// Dio & Retrofit
+// get_it & injectable
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

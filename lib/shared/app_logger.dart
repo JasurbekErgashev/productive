@@ -1,1 +1,1 @@
-// TODO App loger will goes here
+// TODO: Add your own logging code here
