@@ -129,11 +129,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             SocialLoginButton(
                               tabHandler: () {},
-                              imagePath: 'assets/images/facebook_logo.png',
+                              imagePath: 'assets/images/google_logo.png',
                             ),
                             SocialLoginButton(
                               tabHandler: () {},
-                              imagePath: 'assets/images/google_logo.png',
+                              imagePath: 'assets/images/facebook_logo.png',
                             ),
                             SocialLoginButton(
                               tabHandler: () {},
