@@ -137,14 +137,14 @@ class ProductiveTheme {
           ),
         ),
       ),
-      // badgeTheme: const BadgeThemeData(
-      //   backgroundColor: AppColors.blueMediumBlue,
-      //   textStyle: TextStyle(
-      //     fontSize: 10,
-      //     fontWeight: FontWeight.w500,
-      //     color: AppColors.white,
-      //   ),
-      // ),
+      badgeTheme: const BadgeThemeData(
+        backgroundColor: AppColors.blueMediumBlue,
+        textStyle: TextStyle(
+          fontSize: 10,
+          fontWeight: FontWeight.w500,
+          color: AppColors.white,
+        ),
+      ),
       //dialogTheme: DialogTheme(
       //backgroundColor: AppColors.secondary,
       // titleTextStyle: TextStyle(

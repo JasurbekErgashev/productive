@@ -17,10 +17,10 @@ class CustomDrawer extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30,
                   backgroundColor: AppColors.blueMediumBlue,
-                  child: const FaIcon(FontAwesomeIcons.user, size: 30),
+                  child: FaIcon(FontAwesomeIcons.user, size: 30),
                 ),
                 const SizedBox(width: 10),
                 Expanded(

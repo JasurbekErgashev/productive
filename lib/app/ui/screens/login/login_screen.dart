@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
-import 'package:productive/app/ui/screens/login/login%20_screen_viewmodel.dart';
+import 'package:productive/app/ui/screens/login/login_screen_viewmodel.dart';
 import 'package:productive/app/ui/widgets/input_decoration.dart';
 import 'package:productive/app/ui/widgets/auth/or_divider.dart';
 import 'package:productive/app/ui/widgets/primary_button.dart';

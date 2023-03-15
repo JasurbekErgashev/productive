@@ -56,7 +56,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                     ),
                     height: 130,
                     width: 130,
-                    child: Icon(
+                    child: const Icon(
                       Icons.person_rounded,
                       color: AppColors.white,
                       size: 100,
@@ -77,7 +77,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                           return null;
                         },
                         obscureText: isObscure,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 14,
                           letterSpacing: 3,
@@ -108,7 +108,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                           return null;
                         },
                         obscureText: isObscure,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: AppColors.white,
                           fontSize: 14,
                           letterSpacing: 3,
@@ -133,7 +133,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                             isObscure = !isObscure;
                           });
                         },
-                        title: Text(
+                        title: const Text(
                           'Show Password',
                           style: TextStyle(
                             color: AppColors.white,

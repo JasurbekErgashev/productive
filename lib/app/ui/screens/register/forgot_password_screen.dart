@@ -44,7 +44,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   ),
                   height: 130,
                   width: 130,
-                  child: Icon(
+                  child: const Icon(
                     Icons.person_rounded,
                     color: AppColors.white,
                     size: 100,
@@ -71,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         }
                         return null;
                       },
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: AppColors.white,
                         fontSize: 14,
                       ),

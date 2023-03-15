@@ -44,7 +44,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   ),
                   height: 130,
                   width: 130,
-                  child: Icon(
+                  child: const Icon(
                     Icons.person_rounded,
                     color: AppColors.white,
                     size: 100,
@@ -71,7 +71,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       defaultPinTheme: PinTheme(
                         height: 55,
                         width: 50,
-                        textStyle: TextStyle(color: AppColors.white),
+                        textStyle: const TextStyle(color: AppColors.white),
                         decoration: BoxDecoration(
                           border: Border(
                             top: customBorderSide(0.1),
@@ -86,7 +86,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       focusedPinTheme: PinTheme(
                         height: 55,
                         width: 50,
-                        textStyle: TextStyle(color: AppColors.white),
+                        textStyle: const TextStyle(color: AppColors.white),
                         decoration: BoxDecoration(
                           border: Border(
                             top: customBorderSide(1),
@@ -102,7 +102,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                     const SizedBox(height: 30),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           "If you don't receive code.",
                           style: TextStyle(color: AppColors.white),

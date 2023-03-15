@@ -31,7 +31,7 @@ class _TasksScreenState extends State<TasksScreen>
 
   TabBar get _tabBar => TabBar(
         controller: _tabController,
-        // dividerColor: AppColors.transparent,
+        dividerColor: AppColors.transparent,
         tabs: const [
           Tab(text: 'Upcoming'),
           Tab(text: 'All'),
@@ -54,13 +54,13 @@ class _TasksScreenState extends State<TasksScreen>
             onPressed: () {},
             icon: const FaIcon(FontAwesomeIcons.noteSticky),
           ),
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: const Badge(
-          //     label: Text('2'),
-          //     child: FaIcon(FontAwesomeIcons.bell),
-          //   ),
-          // ),
+          IconButton(
+            onPressed: () {},
+            icon: const Badge(
+              label: Text('2'),
+              child: FaIcon(FontAwesomeIcons.bell),
+            ),
+          ),
         ],
         bottom: PreferredSize(
           preferredSize: _tabBar.preferredSize,

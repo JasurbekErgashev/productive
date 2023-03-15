@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
 import 'package:productive/app/navigation/navigator_module.dart';
-import 'package:productive/app/ui/screens/login/login%20_screen_viewmodel.dart';
+import 'package:productive/app/ui/screens/login/login_screen_viewmodel.dart';
 import 'package:productive/app/ui/screens/nav_pages/calendar/calendar_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/expenses/expense_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/stats/stats_screen.dart';
