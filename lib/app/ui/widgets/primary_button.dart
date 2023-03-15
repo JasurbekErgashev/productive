@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:productive/app/ui/widgets/app_circular_progress_indicator.dart';
 import 'package:productive/theme.dart';
 
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton({
     required this.tabHandler,
     required this.buttonChild,
+    this.isLoading = false,
     super.key,
   });
 
   final VoidCallback tabHandler;
   final Widget buttonChild;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: tabHandler,
+      onPressed: isLoading ? () {} : tabHandler,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all(0),
         backgroundColor: MaterialStateProperty.all(
@@ -32,7 +35,7 @@ class PrimaryButton extends StatelessWidget {
           Size(MediaQuery.of(context).size.width, 50),
         ),
       ),
-      child: buttonChild,
+      child: isLoading ? const AppCircularProgressIndicator() : buttonChild,
     );
   }
 }

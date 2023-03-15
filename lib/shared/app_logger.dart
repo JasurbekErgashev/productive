@@ -1,1 +1,3 @@
-// TODO: Add your own logging code here
+import 'package:logger/logger.dart';
+
+final logger = Logger();

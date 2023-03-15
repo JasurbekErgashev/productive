@@ -18,3 +18,16 @@ class LoginAuthEvent extends AuthEvent {
   @override
   List<Object> get props => [...super.props, email, password];
 }
+
+class RegisterAuthEvent extends AuthEvent {
+  RegisterAuthEvent({
+    required this.email,
+    required this.password,
+  });
+
+  final String email;
+  final String password;
+
+  @override
+  List<Object> get props => [...super.props, email, password];
+}

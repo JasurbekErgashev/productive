@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
 import 'package:productive/app/ui/screens/onboarding/widgets/navigation_button.dart';
 import 'package:productive/app/ui/screens/onboarding/widgets/page_content.dart';
+import 'package:productive/data/storage/user_storage.dart';
 import 'package:productive/theme.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -15,6 +16,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
   final _controller = PageController();
+  final userStorage = UserStorage();
 
   bool isFirstPage = true;
 
@@ -32,7 +34,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         backgroundColor: AppColors.dark,
         actions: [
           TextButton(
-            onPressed: () => context.go(AppRoute.login),
+            onPressed: () {
+              userStorage.saveIsFirstTime();
+              context.go(AppRoute.login);
+            },
             child: const Text('SKIP', style: AppTypography.onbButtonStyle),
           ),
         ],
@@ -95,7 +100,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             OnBoardingNavigationButton(
               tabHandler: !isFirstPage
-                  ? () => context.go(AppRoute.login)
+                  ? () {
+                      userStorage.saveIsFirstTime();
+                      context.go(AppRoute.login);
+                    }
                   : () => _controller.nextPage(
                         duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,

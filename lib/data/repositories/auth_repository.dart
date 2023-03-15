@@ -135,6 +135,7 @@ class AuthenticationRepository {
   }
 
   User get currentUser {
+    user.first;
     return _userStorage.user ?? User.empty;
   }
 
@@ -192,6 +193,7 @@ class AuthenticationRepository {
           _googleSignIn.signOut(),
         ],
       );
+      _userStorage.clearStorage();
     } catch (_) {
       throw LogOutFailure();
     }

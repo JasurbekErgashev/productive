@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
+import 'package:productive/app/ui/screens/register/register_screen_viewmodel.dart';
 import 'package:productive/app/ui/widgets/input_decoration.dart';
 import 'package:productive/app/ui/widgets/auth/or_divider.dart';
 import 'package:productive/app/ui/widgets/primary_button.dart';
 import 'package:productive/app/ui/widgets/auth/social_login_button.dart';
+import 'package:productive/domain/bloc/auth_bloc.dart';
+import 'package:productive/domain/state/auth_state.dart';
 import 'package:productive/shared/constants.dart';
 import 'package:productive/theme.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+  const RegisterScreen({required this.viewModel, super.key});
+
+  final RegisterScreenViewModel viewModel;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -110,15 +118,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                         const SizedBox(height: 30),
-                        PrimaryButton(
-                          tabHandler: () {
-                            if (_formKey.currentState!.validate()) {
-                              // TODO: Implement register logic
+                        BlocConsumer<AuthBloc, AuthState>(
+                          listener: (context, state) {
+                            if (state is SuccessAuthState) {
+                              widget.viewModel.navigateToTasks(context);
+                            }
+                            if (state is FailedAuthState) {
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                CustomSnackBar.error(
+                                  message: state.message,
+                                ),
+                                dismissType: DismissType.onSwipe,
+                                dismissDirection: [DismissDirection.up],
+                              );
                             }
                           },
-                          buttonChild: Text(
-                            'Sign Up',
-                            style: AppTypography.pNormal,
+                          builder: (context, state) => PrimaryButton(
+                            isLoading: state is LoadingAuthState,
+                            tabHandler: () {
+                              if (_formKey.currentState!.validate()) {
+                                widget.viewModel.register(
+                                  context,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                              }
+                            },
+                            buttonChild: Text(
+                              'Sign Up',
+                              style: AppTypography.pNormal,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 75),

@@ -10,13 +10,11 @@ class InitialAuthState extends AuthState {}
 
 class LoadingAuthState extends AuthState {}
 
-class InvalidCredAuthState extends AuthState {
-  InvalidCredAuthState({required this.message});
+class FailedAuthState extends AuthState {
+  FailedAuthState({required this.message});
   final String message;
   @override
   List<Object> get props => [...super.props, message];
 }
-
-class FailedAuthState extends AuthState {}
 
 class SuccessAuthState extends AuthState {}

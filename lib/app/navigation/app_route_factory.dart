@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:productive/app/navigation/app_route.dart';
 import 'package:productive/app/navigation/navigator_module.dart';
+import 'package:productive/app/ui/screens/login/login%20_screen_viewmodel.dart';
 import 'package:productive/app/ui/screens/nav_pages/calendar/calendar_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/expenses/expense_screen.dart';
 import 'package:productive/app/ui/screens/nav_pages/stats/stats_screen.dart';
@@ -9,10 +10,20 @@ import 'package:productive/app/ui/screens/nav_pages/tasks/tasks_screen.dart';
 import 'package:productive/app/ui/screens/onboarding/onboarding_screen.dart';
 import 'package:productive/app/ui/screens/login/login_screen.dart';
 import 'package:productive/app/ui/screens/register/register_screen.dart';
+import 'package:productive/app/ui/screens/register/register_screen_viewmodel.dart';
 import 'package:productive/app/ui/screens/root_screen.dart';
+import 'package:productive/data/repositories/auth_repository.dart';
+import 'package:productive/data/storage/user_storage.dart';
+
+final userStorage = UserStorage();
+final AuthenticationRepository authRepository = AuthenticationRepository();
 
 final appRouter = GoRouter(
-  initialLocation: AppRoute.onboarding,
+  initialLocation: userStorage.isFirstTime
+      ? AppRoute.onboarding
+      : authRepository.currentUser.isEmpty
+          ? AppRoute.login
+          : AppRoute.tasks,
   navigatorKey: NavigatorModule.rNavKey,
   routes: [
     GoRoute(
@@ -20,12 +31,17 @@ final appRouter = GoRouter(
       builder: (context, state) => const OnboardingScreen(),
     ),
     GoRoute(
-      path: AppRoute.login,
-      builder: (context, state) => const LoginScreen(),
-    ),
+        path: AppRoute.login,
+        builder: (context, state) {
+          return LoginScreen(
+            viewModel: LoginScreenViewModel(),
+          );
+        }),
     GoRoute(
       path: AppRoute.register,
-      builder: (context, state) => const RegisterScreen(),
+      builder: (context, state) {
+        return RegisterScreen(viewModel: RegisterScreenViewModel());
+      },
     ),
     ShellRoute(
       navigatorKey: NavigatorModule.sNavKey,
